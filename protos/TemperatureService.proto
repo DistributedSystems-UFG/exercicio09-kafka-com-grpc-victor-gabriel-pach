@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package temperature_service;
+
+service TemperatureService {
+  rpc GetLatestAverage (EmptyMessage) returns (TemperatureReply) {}
+  rpc GetHistory (EmptyMessage) returns (TemperatureHistoryReply) {}
+  rpc GetAverageInRange (TimeRange) returns (TemperatureReply) {}
+}
+
+message EmptyMessage {}
+
+message TemperatureReply {
+  float average = 1;
+  string timestamp = 2;
+}
+
+message TemperatureHistoryReply {
+  repeated TemperatureReply records = 1;
+}
+
+message TimeRange {
+  string start = 1;
+  string end = 2;
+}
